@@ -38,8 +38,11 @@ int main(int argc, char *argv[])
 		clnt_adr_sz=sizeof(clnt_adr);
 		str_len=recvfrom(serv_sock, message, BUF_SIZE, 0, 
 								(struct sockaddr*)&clnt_adr, &clnt_adr_sz);
+		
+		printf("IP: %d PORT: %d\n", ntohl(clnt_adr.sin_addr.s_addr), ntohs(clnt_adr.sin_port));
 		sendto(serv_sock, message, str_len, 0, 
 								(struct sockaddr*)&clnt_adr, clnt_adr_sz);
+		printf("IP: %d PORT: %d\n", ntohl(clnt_adr.sin_addr.s_addr), ntohs(clnt_adr.sin_port));
 	}	
 	close(serv_sock);
 	return 0;
